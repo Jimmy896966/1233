@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大便模擬器（PNG版）</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        #toilet {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #poop {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            bottom: -80px;
+            left: 60px;
+            transition: bottom 5s;
+            object-fit: contain;
+        }
+        #start-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result, #achievements {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .rarity-common { color: #000000; }
+        .rarity-uncommon { color: #0000FF; }
+        .rarity-rare { color: #800080; }
+        .rarity-epic { color: #FFA500; }
+        .rarity-legendary { color: #FFD700; }
+        .achievement {
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .unlocked {
+            background-color: #e6ffe6;
+        }
+    </style>
+</head>
+<body>
+    <h1>大便模擬器 💩</h1>
+    <div id="toilet">
+        <img id="poop" src="大便.png" alt="poop">
+    </div>
+    <button id="start-btn" onclick="startPooping()">開始大便 🚽</button>
+    <div id="result"></div>
+    <h2>成就 🏆</h2>
+    <div id="achievements"></div>
+
+    <audio id="legendary-sound" src="哇，金色传说_爱给网_aigei_com.mp3"></audio>
+
+    <script>
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('legendary-sound');
+            audio.load();
+        });
+
+        const poopTypes = [
+            { name: '香蕉型', rarity: 'common', chance: 30, images: ['大便.png'] },
+            { name: '軟綿綿', rarity: 'common', chance: 30, images: ['大便2.png'] },
+            { name: '硬邦邦', rarity: 'uncommon', chance: 20, images: ['大便3.png'] },
+            { name: '水狀', rarity: 'uncommon', chance: 10, images: ['大便4.png'] },
+            { name: '兔子糖', rarity: 'rare', chance: 5, images: ['大便7.png'] },
+            { name: '金光閃閃', rarity: 'epic', chance: 3, images: ['大便6.png'] },
+            { name: '彩虹便', rarity: 'legendary', chance: 2, images: ['大便5.png'] }
+        ];
+
+        const comments = [
+            '哇！這是一次成功的排便！👍',
+            '嗯...還不錯，但還有改進空間。🤔',
+            '天啊！這味道簡直是致命武器！🤢',
+            '這次的手感真是絕了！👌',
+            '我的天，這次排便可以載入史冊了！📚'
+        ];
+
+        const rarityText = {
+            'common': '普通',
+            'uncommon': '不常見',
+            'rare': '稀有',
+            'epic': '史詩',
+            'legendary': '傳說'
+        };
+
+        const rarityEmoji = {
+            'common': '⚪',
+            'uncommon': '🔵',
+            'rare': '🟣',
+            'epic': '🟠',
+            'legendary': '🟡'
+        };
+
+        const achievements = [
+            { id: 'common', name: '平凡如我', emoji: '😊', description: '獲得一次普通大便', unlocked: false },
+            { id: 'uncommon', name: '與眾不同', emoji: '😎', description: '獲得一次不常見大便', unlocked: false },
+            { id: 'rare', name: '稀世珍寶', emoji: '🤩', description: '獲得一次稀有大便', unlocked: false },
+            { id: 'epic', name: '史詩般的排便', emoji: '🤯', description: '獲得一次史詩大便', unlocked: false },
+            { id: 'legendary', name: '挖~ 金色傳說', emoji: '👑', description: '獲得一次傳說大便', unlocked: false },
+            { id: 'collector', name: '大便收藏家', emoji: '🏆', description: '收集所有種類的大便', unlocked: false }
+        ];
+
+        let collectedPoops = [];
+
+        function getRandomPoop() {
+            if (poopTypes.length === 0) {
+                return null; // 所有大便類型都已經出現過
+            }
+
+            const totalChance = poopTypes.reduce((sum, poop) => sum + poop.chance, 0);
+            const rand = Math.random() * totalChance;
+            let cumulativeChance = 0;
+
+            for (let i = 0; i < poopTypes.length; i++) {
+                cumulativeChance += poopTypes[i].chance;
+                if (rand <= cumulativeChance) {
+                    const selectedPoop = poopTypes[i];
+                    poopTypes.splice(i, 1); // 從列表中移除已出現的大便類型
+                    collectedPoops.push(selectedPoop);
+                    return selectedPoop;
+                }
+            }
+
+            return poopTypes[0]; // 預設返回第一個類型（理論上不應該到達這裡）
+        }
+
+        function getRandomImage(poop) {
+            return poop.images[Math.floor(Math.random() * poop.images.length)];
+        }
+
+        function unlockAchievement(rarity) {
+            const achievement = achievements.find(a => a.id === rarity);
+            if (achievement && !achievement.unlocked) {
+                achievement.unlocked = true;
+                updateAchievements();
+                alert(`恭喜！你解鎖了成就：${achievement.emoji} ${achievement.name}`);
+                
+                // 如果是傳說級別的成就，播放音效
+                if (rarity === 'legendary') {
+                    const audio = document.getElementById('legendary-sound');
+                    audio.play().catch(e => console.log("音頻播放失敗:", e));
+                }
+            }
+
+            // 檢查是否收集了所有大便類型
+            if (collectedPoops.length === 7) {
+                const collectorAchievement = achievements.find(a => a.id === 'collector');
+                if (!collectorAchievement.unlocked) {
+                    collectorAchievement.unlocked = true;
+                    updateAchievements();
+                    alert(`恭喜！你解鎖了成就：${collectorAchievement.emoji} ${collectorAchievement.name}`);
+                }
+            }
+        }
+
+        function updateAchievements() {
+            const achievementsDiv = document.getElementById('achievements');
+            achievementsDiv.innerHTML = achievements.map(a => `
+                <div class="achievement ${a.unlocked ? 'unlocked' : ''}">
+                    <span class="emoji">${a.emoji}</span> <strong>${a.name}</strong>: ${a.description}
+                    ${a.unlocked ? '✅' : '🔒'}
+                </div>
+            `).join('');
+        }
+
+        function startPooping() {
+            const poop = document.getElementById('poop');
+            const result = document.getElementById('result');
+            const startBtn = document.getElementById('start-btn');
+
+            startBtn.disabled = true;
+            result.textContent = '正在努力中... 💪';
+            poop.style.bottom = '120px';
+
+            setTimeout(() => {
+                const randomPoop = getRandomPoop();
+                if (randomPoop) {
+                    const randomComment = comments[Math.floor(Math.random() * comments.length)];
+                    const randomImage = getRandomImage(randomPoop);
+                    poop.src = randomImage;
+                    result.innerHTML = `
+                        <strong>大便類型：</strong>${randomPoop.name}<br>
+                        <strong>稀有度：</strong><span class="rarity-${randomPoop.rarity}">${rarityEmoji[randomPoop.rarity]} ${rarityText[randomPoop.rarity]}</span><br>
+                        <strong>評價：</strong>${randomComment}
+                    `;
+                    unlockAchievement(randomPoop.rarity);
+                } else {
+                    result.innerHTML = `<strong>恭喜！</strong>你已經收集到了所有種類的大便！🎉`;
+                    poop.src = '大便.png'; // 使用預設圖片
+                }
+                startBtn.disabled = false;
+            }, 5000);
+
+            setTimeout(() => {
+                poop.style.bottom = '-80px';
+            }, 6000);
+        }
+
+        // 初始化成就列表
+        updateAchievements();
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>點及時會有Emoji</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        #emojiContainer {
+            font-size: 100px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #clickMe {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        #clickMe:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="emojiContainer"></div>
+    <button id="clickMe">點擊我！</button>
+
+    <script>
+        const emojis = ['😀', '😂', '🤣', '😍', '🥰', '😎', '🤔', '🤯', '🥳', '🤩'];
+        const emojiContainer = document.getElementById('emojiContainer');
+        const clickButton = document.getElementById('clickMe');
+
+        function showRandomEmoji() {
+            const randomIndex = Math.floor(Math.random() * emojis.length);
+            emojiContainer.textContent = emojis[randomIndex];
+        }
+
+        clickButton.addEventListener('click', showRandomEmoji);
+    </script>
+</body>
+</html>

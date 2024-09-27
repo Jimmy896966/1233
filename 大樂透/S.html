@@ -1,0 +1,1234 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡拉米</title>
+
+    <link href="https://cdn.discordapp.com/emojis/1033024204100087879.webp?size=128&quality=lossless" rel="shortcut icon"/>
+    <style>
+       :root {
+ 
+    --background-color: #121212;
+    --text-color: #f0f0f0;
+    --header-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #121212, #2a2a2a);
+   
+    color:  var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+header {
+    background: var(--header-gradient), url('6768-gojo-bob-pfpsgg.gif');
+    background-blend-mode: overlay;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%);
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    animation: headerAnimation 20s infinite alternate;
+}
+
+@keyframes headerAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    object-fit: cover;
+    margin-top: -50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+header img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+}
+
+header h1 {
+    margin: 15px 0 5px;
+    font-size: 2.5em;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, #9718e6fe, #7062e6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.15em solid var(--primary-color);
+    animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite, glowText 2s ease-in-out infinite alternate;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--primary-color); }
+}
+
+@keyframes glowText {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary-color), 0 0 20px var(--primary-color); }
+    to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--primary-color), 0 0 40px var(--primary-color); }
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+nav a {
+    color: var(--primary-color);
+    padding: 8px 12px;
+    text-decoration: none;
+    margin: 0 3px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 0.8em;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.content {
+    padding: 40px 15px;
+    max-width: 900px;
+    margin: auto;
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 10;
+    animation: fadeInUp 1s ease-out;
+}
+
+section {
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.image-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+}
+
+.image-gallery div {
+    flex: 0 0 auto;
+    text-align: center;
+    margin: 8px;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.image-gallery img {
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    object-fit: cover;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 10;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: visibility 0.3s, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.image-gallery div:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+footer {
+    background-color: var(--background-color);
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    margin-top: 20px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.recommended-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.recommended-item {
+    margin: 10px;
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+.recommended-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.image-caption {
+    font-size: 0.8em;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.floating-ball {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 154, 158, 0.8);
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+    z-index: 9999;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating-ball:hover {
+    transform: scale(1.1);
+}
+
+.animated-title {
+    font-size: 2em;
+    color: #ffffff;
+    background: linear-gradient(45deg, #65a9e8, #4ecdc4, #45b7d1, #ca2be7);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+#about, #projects, #favorites, #languages, #history {
+    background-color: rgba(42, 42, 42, 0.8);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+strong {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress-container h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    background-color: #444;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-text {
+    text-align: right;
+    margin-top: 2px;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.scroll-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.scroll-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.language-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 5px;
+}
+
+.community-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.community-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+    }
+    nav a {
+        margin: 5px 0;
+    }
+    header img {
+        width: 80px;
+        height: 80px;
+    }
+    .content {
+        padding: 20px 10px;
+    }
+    header h1 {
+        font-size: 1.8em;
+    }
+    .image-gallery {
+        flex-direction: row;
+    }
+    .image-gallery img {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+#development-progress {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+#development-progress .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#development-progress h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.color-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.legend-text {
+    font-size: 0.8em;
+    color: #f0f0f0;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+}
+
+.progress-container h3 {
+    color: #f0f0f0;
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+.progress-bar {
+    background-color: #444;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+    background-color: var(--progress-color);
+}
+
+.progress-text {
+    text-align: right;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: var(--progress-color);
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+@media (max-width: 768px) {
+    #development-progress .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .color-legend {
+        margin-top: 10px;
+    }
+}
+
+.notification-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: rgba(255, 154, 158, 0.9); /* 略微透明的背景 */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: none;
+}
+
+.notification-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.notification-content h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.notification-content p {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#close-notification {
+    background-color: white;
+    color: #ff9a9e;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#close-notification:hover {
+    background-color: #ff9a9e;
+    color: white;
+}
+
+/* 添加一個半透明的背景遮罩 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+
+}
+
+
+
+/* 容器樣式 */
+.rotating-tags-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* 旋轉標籤的基本樣式 */
+.rotating-tag {
+    position: absolute;
+    background-color: rgba(255, 154, 158, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: rotate 10s linear infinite;
+    cursor: pointer; /* 添加指針樣式，表示可以點擊 */
+}
+
+/* 定義旋轉動畫 */
+@keyframes rotate {
+    0% { transform: rotate(0deg) translateY(-50px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateY(-50px) rotate(-360deg); }
+}
+
+/* 定義消失動畫 */
+@keyframes disappear {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
+}
+
+/* 應用消失動畫的類 */
+.disappearing {
+    animation: disappear 0.5s forwards;
+}
+
+
+
+    </style>
+
+
+
+
+
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="可愛 活潑 旋律  [Vlog No Copyright Music] 無版權音樂 Vlog 音樂 BGM 背景音樂 開心.mp4" type="audio/mpeg">
+        您的瀏覽器不支援音頻元素。
+    </audio>
+
+    <div class="floating-ball" id="music-control">
+        🎵
+    </div>
+
+    <header>
+        <img src="IMG_20240607_214913_585.jpg" alt="頭像">
+        <h1 class="animated-title">偷看好玩咪</h1>
+    </header>
+
+    <input type="hidden" id="discord-webhook" value="https://discord.com/api/webhooks/1286675182370427011/-Wynon-5OSGHOhLbbs5kYZbG-y0a_Ye3ZQQWniKgR2jFDoiTmNvK2ELmlbPGVfQOrENd">
+
+    <section id="about" style="background-color: #2a2a2a; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);">
+        <h2 style="color: #ff9a9e;">關於我</h2>
+        <div class="project-container" style="display: flex; align-items: center;">
+          <img src="https://cdn.discordapp.com/emojis/1104423008724070576.gif?size=128&quality=lossless" alt="專案圖示" class="icon" style="border-radius: 50%; border: 2px solid #ff9a9e; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); width: 80px; height: 80px; margin-right: 15px;">
+          <div class="project-details" style="flex-grow: 1;">
+            <p style="color: #ffffff;"><strong>暱稱:</strong> 魚/吉米 <strong>興趣:</strong>並不沒有</p>
+            <p style="color: #ffffff;"><strong>喜歡89風</strong> <strong>喜歡廟會</strong></p>
+            <p><strong>廟會/睡覺/騎車/花錢/</strong></p>
+            <p id="daysCounter" style="color: #ffffff; margin-top: 5px; font-size: 0.9em;"></p>
+
+            <div class="countdown" id="countdown" style="margin-top: 10px; font-size: 1.1em; color: #ff9a9e;"></div>
+            <div class="progress-bar-container" style="background-color: #444; border-radius: 5px; height: 10px; width: 100%; margin-top: 10px;">
+              <div id="progressBar" class="progress-bar" style="background-color: #ff9a9e; border-radius: 5px; height: 100%; width: 0%;"></div>
+            </div>
+            <p id="daysCounter" style="color: #ffffff; margin-top: 5px; font-size: 0.9em;"></p>
+          </div>
+        </div>
+      </section>
+      
+
+      <section id="team" style="background-color: #2a2a2a; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); margin-top: 30px;">
+        <h2 style="color: #ff9a9e;">團隊成員</h2>
+        <div class="team-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+          <!-- 團隊成員卡片將在這裡動態生成 -->
+
+        </div>
+      </section>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("JavaScript is running");
+            console.log("daysCounter element:", document.getElementById('daysCounter'));
+    
+            // 設定在一起的起始日期
+            const startDate = new Date('2024-06-24'); // 請將此日期更改為您的實際開始日期
+    
+            function updateProgressBar() {
+                console.log("Updating progress bar");
+                const today = new Date();
+                const timeDiff = today.getTime() - startDate.getTime();
+                const daysTogether = Math.floor(timeDiff / (1000 * 3600 * 24));
+    
+                // 設定進度條的最大天數（例如365天，即一年）
+                const maxDays = 365;
+                const progress = (daysTogether / maxDays) * 100;
+    
+                // 更新進度條
+                const progressBar = document.getElementById('progressBar');
+                if (progressBar) {
+                    progressBar.style.width = `${Math.min(progress, 100)}%`;
+                } else {
+                    console.error("Progress bar element not found");
+                }
+    
+                // 更新天數計數器
+                const daysCounter = document.getElementById('daysCounter');
+                if (daysCounter) {
+                    daysCounter.textContent = `跟女友在一起 ${daysTogether} 天 / ${maxDays} 天`;
+                    console.log("Days counter updated:", daysCounter.textContent);
+                } else {
+                    console.error("Days counter element not found");
+                }
+            }
+    
+            // 頁面加載時更新進度條
+            updateProgressBar();
+    
+            // 每天凌晨更新進度條
+            function scheduleNextUpdate() {
+                const now = new Date();
+                const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+                const timeUntilMidnight = tomorrow - now;
+    
+                setTimeout(function() {
+                    updateProgressBar();
+                    scheduleNextUpdate(); // 設置下一天的更新
+                }, timeUntilMidnight);
+            }
+    
+            scheduleNextUpdate();
+    
+     
+            });
+        ;
+        </script>
+
+
+<div id="notification-container" class="notification-container">
+    <div class="notification-content">
+        <h3>最新通知</h3>
+        <p id="notification-message">這裡是通知內容。您可以在這裡放置任何重要的更新或信息。</p>
+        <button id="close-notification">關閉</button>
+    </div>
+</div>
+
+
+
+
+        <section id="projects" style="background-color: #2a2a2a; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);">
+            <h2 style="color: #ff9a9e;">專案</h2>
+            <div class="project-container">
+                <img src="https://cdn.discordapp.com/emojis/1104423139435360327.gif?size=128&quality=lossless" alt="專案圖示" class="icon" style="border-radius: 50%; border: 2px solid #ff9a9e; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+                <div class="project-details">
+                    <p><strong>dc bot py:</strong> 釣魚系統 / 虛擬賭博 / 群管發言</p>
+                    <p><strong>網頁:</strong> 簡易公司網頁 / 計入雙向確認顯示 / 物品搜尋 / 請購單</p>
+                </div>
+            </div>
+        </section>
+    
+
+        <section id="languages" style="background-color: #2a2a2a; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);">
+            <h2 style="color: #ff9a9e;">不會的語言</h2>
+            <div class="project-container">
+                <img src="https://cdn.discordapp.com/emojis/1104423034028306530.gif?size=128&quality=lossless" alt="專案圖示" class="icon" style="border-radius: 50%; border: 2px solid #ff9a9e; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+                <div class="project-details">
+                    <img src="https://cdn.discordapp.com/emojis/1027532410138660914.webp?size=96&quality=lossless" alt="專案圖示" class="language-icon">
+                    <img src="https://cdn.discordapp.com/emojis/1027532478354833409.webp?size=96&quality=lossless" alt="專案圖示" class="language-icon">
+                    <img src="https://cdn.discordapp.com/emojis/1024922308604854352.webp?size=96&quality=lossless" alt="專案圖示" class="language-icon">
+                    <img src="https://cdn.discordapp.com/emojis/1024922239184928838.webp?size=96&quality=lossless" alt="專案圖示" class="language-icon">
+                    <img src="c.PNG" alt="專案圖示" class="language-icon">
+                    <img src="https://cdn.discordapp.com/emojis/1027532084438388806.webp?size=96&quality=lossless" alt="專案圖示" class="language-icon">
+                </div>
+            </div>
+        </section>
+        
+        <section id="history" style="background-color: #2a2a2a; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);">
+            <h2 style="color: #ff9a9e;">社群歷史</h2>
+            <div class="project-container">
+                <img src="https://cdn.discordapp.com/emojis/1104423049945686168.gif?size=96&quality=lossless" alt="專案圖示" class="icon" style="border-radius: 50%; border: 2px solid #ff9a9e; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+                <div class="project-details" style="margin-left: 10px;">
+                    <p style="font-size: 1.1em; color: #ff9a9e;"><strong>歷史:</strong> 總加</p>
+                    <p style="font-size: 1.1em; color: #ff9a9e;"><strong>抽 <img src="https://cdn.discordapp.com/emojis/1148244946575446056.gif?size=44&quality=lossless" alt="專案圖示" class="icon"> 50(送)</strong></p>
+                    <p style="font-size: 1.1em; color: #ff9a9e;"><strong>加成 <img src="https://cdn.discordapp.com/emojis/1176153089238114345.gif?size=32&quality=lossless" alt="專案圖示" class="icon"> 91 次(我的群+別的群)</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>圖片</h2>
+            <div class="image-gallery">
+                <div>
+                    <img src="社群計入.jpg" alt="圖片1">
+                    <p class="image-caption">社群計入</p>
+                </div>
+                <div>
+                    <img src="https://cdn.discordapp.com/emojis/1035141377333411870.webp?size=128&quality=lossless" alt="圖片2">
+                    <p class="image-caption">圖片描述2</p>
+                </div>
+                <div>
+                    <img src="https://cdn.discordapp.com/emojis/1176177429358837820.webp?size=128&quality=lossless" alt="圖片3">
+                    <p class="image-caption">圖片描述3</p>
+                </div>
+                <!-- 可以添加更多圖片 -->
+            </div>
+        </section>
+
+        <section id="recommended">
+            <h2>其他小作品</h2>
+            <div class="recommended-wrapper">
+                <div class="recommended-container">
+                    <div class="recommended-item">
+                        <img src="https://cdn.discordapp.com/emojis/1105505806880874526.webp?size=96&quality=lossless" alt="圖片1">
+                        <p class="image-caption">dc bot 暫時不開放</p>
+                        <button class="community-btn" onclick="window.open('', '_blank')">加入群組</button>
+                    </div>
+                    <div class="recommended-item">
+                        <img src="https://cdn.discordapp.com/emojis/1145454712011882587.gif?size=128&quality=lossless" alt="圖片2">
+                        <p class="image-caption">自己的社群</p>
+                        <button class="community-btn" onclick="window.open('https://discord.gg/sa-chi-gua-1158066166695219291', '_blank')">進入社群</button>
+                    </div>
+                    <div class="recommended-item">
+                        <img src="https://cdn.discordapp.com/emojis/960721054450466876.webp?size=96&quality=lossless" alt="圖片2">
+                        
+                        <p class="image-caption">大便A</p>
+                        <button class="community-btn" onclick="window.open('大便.html', '_blank')">進入分頁</button>
+                    </div>
+
+                    <div class="recommended-container">
+                        <div class="recommended-item">
+                            <img src="https://cdn.discordapp.com/emojis/960721054450466876.webp?size=96&quality=lossless" alt="圖片1">
+                            <p class="image-caption">隨機emoji</p>
+                            <button class="community-btn" onclick="window.open('emoji.html', '_blank')">進入分頁</button>
+                        </div>
+
+
+                </div>
+            </div>
+    
+    
+        
+            <section id="development-progress">
+                <div class="header">
+                    <h2>開發進度</h2>
+                    <div class="color-legend">
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #4CAF50;"></div>
+                            <span class="legend-text">進行中</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #FFC107;"></div>
+                            <span class="legend-text">規劃階段</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #FF5722;"></div>
+                            <span class="legend-text">已停止</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #2196F3;"></div>
+                            <span class="legend-text">維護中</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #9C27B0;"></div>
+                            <span class="legend-text">即將完成</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <h3>網站開發</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%; --progress-color: #2196F3;"></div>
+                    </div>
+                    <p class="progress-text">75% 完成</p>
+                </div>
+                
+                <div class="progress-container">
+                    <h3>賭博 Bot</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 60%; --progress-color:#FF5722;"></div>
+                    </div>
+                    <p class="progress-text">60% 完成</p>
+                </div>
+                
+                <div class="progress-container">
+                    <h3>釣魚系統bot</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 40%; --progress-color: #FF5722;"></div>
+                    </div>
+                    <p class="progress-text">40% 停止開發</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>簡易公司網頁</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 30%; --progress-color: #2196F3;"></div>
+                    </div>
+                    <p class="progress-text">40% 完成(維護中)</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>計入雙向確認顯示</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%; --progress-color: #2196F3;"></div>
+                    </div>
+                    <p class="progress-text">99% 完成(維護中)</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>物品搜尋</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%; --progress-color:  #2196F3;"></div>
+                    </div>
+                    <p class="progress-text">80% 暫停開發(維護中)</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>請購單</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 25%; --progress-color: #2196F3;"></div>
+                    </div>
+                    <p class="progress-text">40% 完成(維護中)</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>計入品項</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%; --progress-color:  #2196F3;"></div>
+                    </div>
+                    <p class="progress-text">70% 完成(維護中)</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>學校專題</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%; --progress-color:#FFC107;"></div>
+                    </div>
+                    <p class="progress-text">0% 完成</p>
+                </div>
+        
+                <div class="progress-container">
+                    <h3>社群創建</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%; --progress-color:#FFC107;"></div>
+                    </div>
+                    <p class="progress-text">90% 已停止</p>
+                </div>
+            </section>
+ 
+            <script>
+                document.querySelectorAll('.progress').forEach(progress => {
+                    progress.style.backgroundColor = `var(--progress-color, #4CAF50)`;
+                });
+            </script>
+
+<div class="rotating-tags-container"id="tagContainer">
+    <div class="rotating-tag">帥哥</div>
+    <div class="rotating-tag">有錢</div>
+    <div class="rotating-tag">瘋子</div>
+    <div class="rotating-tag">超有愛</div>
+    <div class="rotating-tag">人超好</div>
+    <div class="rotating-tag">有病</div>
+    <div class="rotating-tag">睡覺專家</div>
+    <div class="rotating-tag">放假</div>
+    <div class="rotating-tag">騎車</div>
+    <div class="rotating-tag">陣頭</div>
+    <div class="rotating-tag">廟會</div>
+    <div class="rotating-tag">愛愛</div>
+    <div class="rotating-tag">吃貨</div>
+    <div class="rotating-tag">html</div>
+    <div class="rotating-tag">css</div>
+    <div class="rotating-tag">JavaScript</div>
+    <div class="rotating-tag">c</div>
+    <div class="rotating-tag">c#</div>
+
+    <!-- 可以根據需要添加更多標籤 -->
+</div>
+
+
+    <script>
+        const music = document.getElementById('background-music');
+        const floatingBall = document.getElementById('music-control');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        floatingBall.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - floatingBall.getBoundingClientRect().left;
+            offsetY = e.clientY - floatingBall.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                floatingBall.style.left = `${e.clientX - offsetX}px`;
+                floatingBall.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // 控制音樂播放
+        floatingBall.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                floatingBall.innerHTML = '🎵'; // 播放音樂的圖示
+            } else {
+                music.pause();
+                floatingBall.innerHTML = '🔇'; // 暫停音樂的圖示
+            }
+        });
+
+        // 倒數計時器功能
+        const birthday = new Date('2025-01-22T00:00:00'); // 設定明年生日
+        const countdownElement = document.getElementById('countdown');
+    
+        function updateCountdown() {
+            const now = new Date();
+            const timeDiff = birthday - now;
+    
+            if (timeDiff < 0) {
+                countdownElement.innerHTML = "生日已過！";
+                clearInterval(countdownInterval);
+                return;
+            }
+    
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    
+            countdownElement.innerHTML = `距離我的生日還有 ${days} 天 ${hours} 小時 ${minutes} 分鐘 ${seconds} 秒`;
+        }
+    
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // 新增的動畫效果
+        document.querySelectorAll('section').forEach(section => {
+            section.addEventListener('mouseover', () => {
+                section.style.transform = 'scale(1.02)';
+            });
+            section.addEventListener('mouseout', () => {
+                section.style.transform = 'scale(1)';
+            });
+        });
+
+        // 為圖片添加視差效果
+        document.addEventListener('mousemove', (e) => {
+            const images = document.querySelectorAll('.image-gallery img');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            images.forEach(img => {
+                const imgX = (mouseX - 0.5) * 20;
+                const imgY = (mouseY - 0.5) * 20;
+                img.style.transform = `translate(${imgX}px, ${imgY}px)`;
+            });
+        });
+
+    
+
+
+// 推薦社群自動輪轉
+const recommendedContainer = document.querySelector('.recommended-container');
+    const scrollStep = 1; // 調整滾動速度
+    const scrollInterval = 30; // 調整滾動頻率
+
+    function autoScroll() {
+        recommendedContainer.scrollLeft += scrollStep;
+        if (recommendedContainer.scrollLeft >= recommendedContainer.scrollWidth - recommendedContainer.clientWidth) {
+            recommendedContainer.scrollLeft = 0;
+        }
+    }
+
+    // 開始自動滾動
+    let scrollTimer = setInterval(autoScroll, scrollInterval);
+
+    // 當鼠標懸停在推薦社群上時暫停滾動
+    recommendedContainer.addEventListener('mouseenter', () => {
+        clearInterval(scrollTimer);
+    });
+
+    // 當鼠標離開推薦社群時恢復滾動
+    recommendedContainer.addEventListener('mouseleave', () => {
+        scrollTimer = setInterval(autoScroll, scrollInterval);
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const notificationContainer = document.getElementById('notification-container');
+    const closeNotificationBtn = document.getElementById('close-notification');
+    const discordWebhook = document.getElementById('discord-webhook').value;
+    let overlay;
+
+    // 創建背景遮罩
+    function createOverlay() {
+        overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+    }
+
+    // 顯示通知
+    function showNotification() {
+        createOverlay();
+        overlay.style.display = 'block';
+        notificationContainer.style.display = 'block';
+    }
+
+    // 關閉通知
+    function closeNotification() {
+        notificationContainer.style.display = 'none';
+        overlay.style.display = 'none';
+        sendDiscordNotification('通知已被關閉');
+    }
+
+    // 獲取當前時間的格式化字符串
+    function getCurrentTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    // 發送 Discord 通知
+    function sendDiscordNotification(message) {
+        const currentTime = getCurrentTime();
+        const fullMessage = `${currentTime} - ${message}`;
+
+        fetch(discordWebhook, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: fullMessage
+            }),
+        })
+        .then(response => console.log('Notification sent to Discord'))
+        .catch(error => console.error('Error sending notification to Discord:', error));
+    }
+
+    // 頁面加載後顯示通知
+    showNotification();
+
+    // 點擊關閉按鈕時隱藏通知
+    closeNotificationBtn.addEventListener('click', closeNotification);
+
+    // 點擊背景遮罩也可以關閉通知
+    document.addEventListener('click', function(event) {
+        if (event.target === overlay) {
+            closeNotification();
+        }
+    });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('tagContainer');
+    const tags = Array.from(container.getElementsByClassName('rotating-tag'));
+    const maxTags = tags.length;
+    const originalTags = tags.map(tag => tag.textContent); // 儲存原始標籤文字
+
+    function initializeTags() {
+        tags.forEach(initializeTag);
+    }
+
+    function initializeTag(tag) {
+        // 設置隨機位置和動畫
+        tag.style.left = `${Math.random() * 100}%`;
+        tag.style.bottom = `${Math.random() * 80}px`;
+        tag.style.animationDuration = `${5 + Math.random() * 10}s`;
+        tag.style.animationDelay = `${Math.random() * -15}s`;
+        tag.style.animationDirection = Math.random() > 0.5 ? 'reverse' : 'normal';
+
+        // 添加點擊事件
+        tag.addEventListener('click', handleTagClick);
+    }
+
+    function handleTagClick() {
+        // 只處理被點擊的標籤
+        this.classList.add('disappearing');
+        setTimeout(() => {
+            this.remove();
+            createNewTag(); // 創建一個新標籤來替代被移除的標籤
+        }, 500);
+    }
+
+    function createNewTag() {
+        const availableTags = originalTags.filter(text => 
+            !Array.from(container.children).some(tag => tag.textContent === text)
+        );
+        if (availableTags.length > 0) {
+            const newTagText = availableTags[Math.floor(Math.random() * availableTags.length)];
+            const newTag = document.createElement('div');
+            newTag.className = 'rotating-tag';
+            newTag.textContent = newTagText;
+            initializeTag(newTag);
+            container.appendChild(newTag);
+        }
+    }
+
+    // 初始化所有標籤
+    initializeTags();
+});
+
+
+  // 團隊成員數據
+  const teamMembers = [
+    { name: "魚/吉米", role: "創始人", avatar: "IMG_20240607_214913_585.jpg" },
+    { name: "成員2", role: "開發者", avatar: "https://cdn.discordapp.com/emojis/1104423008724070576.gif?size=128&quality=lossless" },
+    { name: "成員3", role: "設計師", avatar: "https://cdn.discordapp.com/emojis/1104423034028306530.gif?size=128&quality=lossless" },
+    { name: "成員4", role: "市場營銷", avatar: "https://cdn.discordapp.com/emojis/1104423049945686168.gif?size=96&quality=lossless" }
+  ];
+
+  // 生成團隊成員卡片
+  function generateTeamCards() {
+    const teamContainer = document.querySelector('.team-container');
+    teamMembers.forEach(member => {
+      const card = document.createElement('div');
+      card.className = 'team-card';
+      card.style.cssText = `
+        background-color: #333;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        width: 100px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      `;
+      card.innerHTML = `
+        <img src="${member.avatar}" alt="${member.name}" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+        <h3 style="color: #ff9a9e; margin: 5px 0;">${member.name}</h3>
+        <p style="color: #ffffff;">${member.role}</p>
+      `;
+      card.addEventListener('mouseover', () => {
+        card.style.transform = 'translateY(-5px)';
+        card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
+      });
+      card.addEventListener('mouseout', () => {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = 'none';
+      });
+      teamContainer.appendChild(card);
+    });
+  }
+
+  // 當文檔加載完成時生成團隊卡片
+  document.addEventListener('DOMContentLoaded', generateTeamCards);
+
+    </script>
+</body>
+</html>

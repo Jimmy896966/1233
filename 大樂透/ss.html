@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動態魔術方塊</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script type="module">
+        import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+        import { OrbitControls } from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/jsm/controls/OrbitControls.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0xeeeeee, 1); // Set background color
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; 
+        controls.dampingFactor = 0.25;
+        controls.enableZoom = true;
+
+        const colors = [
+            0xff0000, // Red
+            0x00ff00, // Green
+            0x0000ff, // Blue
+            0xffff00, // Yellow
+            0xffa500, // Orange
+            0xffffff  // White
+        ];
+
+        const cubeSize = 0.9;
+        const gap = 0.05;
+        const cubes = [];
+
+        function createCube(x, y, z) {
+            const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+            const materials = colors.map(color => new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide }));
+            const cube = new THREE.Mesh(geometry, materials);
+            cube.position.set(x * (cubeSize + gap), y * (cubeSize + gap), z * (cubeSize + gap));
+            scene.add(cube);
+            cubes.push(cube);
+        }
+
+        for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+                for (let z = -1; z <= 1; z++) {
+                    if (x !== 0 || y !== 0 || z !== 0) {
+                        createCube(x, y, z);
+                    }
+                }
+            }
+        }
+
+        camera.position.set(3, 3, 5); // Set a good initial position for the camera
+        camera.lookAt(scene.position);
+
+        function rotateLayer(layer, axis, angle) {
+            const quaternion = new THREE.Quaternion();
+            quaternion.setFromAxisAngle(axis, angle);
+            layer.forEach(cube => {
+                cube.position.applyQuaternion(quaternion);
+                cube.rotation.x += angle;
+                cube.rotation.y += angle;
+                cube.rotation.z += angle;
+            });
+        }
+
+        function getLayer(axis, index) {
+            return cubes.filter(cube => Math.round(cube.position[axis] / (cubeSize + gap)) === index);
+        }
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'r') {
+                const layer = getLayer('y', 1);
+                rotateLayer(layer, new THREE.Vector3(0, 1, 0), Math.PI / 2);
+            }
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
